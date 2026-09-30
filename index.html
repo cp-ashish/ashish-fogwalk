@@ -66,10 +66,10 @@ kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);padding:
 #hud{position:fixed;inset:0;z-index:10;pointer-events:none;opacity:0;transition:opacity 1s .4s}
 #hud.on{opacity:1}
 .hud-top{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 0}
-.sig{font-family:var(--display);font-size:22px;line-height:1;color:var(--ink);text-shadow:0 0 18px rgba(235,231,219,.25)}
-.sig small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px;color:var(--smoke)}
-#pagesHud{display:flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--smoke)}
-#pagesHud i{display:inline-block;width:8px;height:11px;border:1px solid var(--smoke);transform:rotate(-6deg)}
+.sig{font-family:var(--display);font-size:22px;line-height:1;color:var(--bone);text-shadow:0 1px 10px rgba(0,0,0,.9)}
+.sig small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px;color:var(--ash)}
+#pagesHud{display:flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ash)}
+#pagesHud i{display:inline-block;width:8px;height:11px;border:1px solid var(--ash);transform:rotate(-6deg)}
 #pagesHud i.got{background:var(--ember);border-color:var(--ink);box-shadow:0 0 8px rgba(239,220,170,.9)}
 .hud-btns{display:flex;gap:6px;pointer-events:auto;flex-wrap:wrap;justify-content:flex-end}
 .hbtn{background:rgba(10,11,10,.72);border:1px solid var(--line);padding:8px 11px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
@@ -83,9 +83,9 @@ kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);padding:
 #chapters .s{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ash)}
 #card{position:absolute;left:50%;top:16vh;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity 1.4s ease;width:min(90vw,700px)}
 #card.show{opacity:1}
-#card .num{font-family:var(--display);font-size:22px;letter-spacing:.3em;color:var(--smoke)}
-#card .ttl{font-family:var(--display);font-size:clamp(36px,6vw,72px);line-height:1;color:var(--ink);text-shadow:0 0 30px rgba(235,231,219,.35);margin:6px 0 8px}
-#card .sub{color:var(--smoke)}
+#card .num{font-family:var(--display);font-size:22px;letter-spacing:.3em;color:var(--ash)}
+#card .ttl{font-family:var(--display);font-size:clamp(36px,6vw,72px);line-height:1;color:var(--bone);text-shadow:0 2px 24px rgba(0,0,0,.95);margin:6px 0 8px}
+#card .sub{color:var(--ash)}
 #toast{position:absolute;left:50%;top:calc(64px + env(safe-area-inset-top,0px));transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:rgba(10,11,10,.78);border:1px solid rgba(239,220,170,.35);padding:7px 12px;color:var(--ember);opacity:0;transition:opacity .6s;white-space:nowrap}
 #toast.show{opacity:1}
 #toast::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ember);box-shadow:0 0 10px var(--ember)}
@@ -97,13 +97,13 @@ kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);padding:
 #prompt kbd{font-size:12px;padding:3px 8px;border-color:var(--bone)}
 #prompt span{font-family:var(--serif);font-size:17px}
 #rail{position:absolute;left:16px;right:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));height:40px;pointer-events:auto}
-#rail .track{position:absolute;left:0;right:0;top:19px;height:1px;background:rgba(10,11,10,.55)}
-#rail .fill{position:absolute;left:0;top:19px;height:1px;background:var(--ink);width:0}
-#rail .dot{position:absolute;top:13px;width:13px;height:13px;margin-left:-6px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px rgba(239,220,170,.35),0 0 14px rgba(239,220,170,.7)}
+#rail .track{position:absolute;left:0;right:0;top:19px;height:1px;background:rgba(235,231,219,.22)}
+#rail .fill{position:absolute;left:0;top:19px;height:1px;background:var(--ember);width:0;opacity:.7}
+#rail .dot{position:absolute;top:13px;width:13px;height:13px;margin-left:-6px;border-radius:50%;background:var(--ember);box-shadow:0 0 0 3px rgba(239,220,170,.35),0 0 14px rgba(239,220,170,.7)}
 #rail .tick{position:absolute;top:0;transform:translateX(-50%);background:none;border:0;padding:0 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px}
-#rail .tick i{display:block;width:5px;height:9px;border-radius:2px 2px 3px 3px;background:var(--ink);margin-top:14px;transition:background .6s,box-shadow .6s}
+#rail .tick i{display:block;width:5px;height:9px;border-radius:2px 2px 3px 3px;background:rgba(235,231,219,.35);margin-top:14px;transition:background .6s,box-shadow .6s}
 #rail .tick.lit i{background:var(--ember);box-shadow:0 0 10px var(--ember),0 0 0 1px var(--ink)}
-#rail .tick b{font-family:var(--display);font-weight:400;font-size:13px;color:var(--ink);letter-spacing:.1em;opacity:.8;white-space:nowrap}
+#rail .tick b{font-family:var(--display);font-weight:400;font-size:13px;color:var(--bone);letter-spacing:.1em;opacity:.65;text-shadow:0 1px 6px #000;white-space:nowrap}
 #rail .tick:hover b{opacity:1}
 #touch{position:fixed;inset:auto 0 calc(70px + env(safe-area-inset-bottom,0px)) 0;display:none;justify-content:space-between;padding:0 16px;z-index:12;pointer-events:none}
 .tgrp{display:flex;gap:10px;pointer-events:auto}
@@ -638,17 +638,17 @@ function buildWorld(){
 
 /* ---- Prologue ---- */
 function buildPrologue(){
-  const title=textMesh([{t:"ASHISH KUMAR",size:190,font:F_DISPLAY,ls:24,lh:1.05},{t:"a software engineer, building with agents and the MERN stack",size:44,font:F_SERIF,style:'italic',lh:1.6}],{upp:0.0125,color:'#0b0c0b'});
-  title.position.set(13,5.8,-6); scene.add(title);
+  const title=textMesh([{t:"ASHISH KUMAR",size:190,font:F_DISPLAY,ls:24,lh:1.05},{t:"a software engineer, building with agents and the MERN stack",size:44,font:F_SERIF,style:'italic',lh:1.6}],{upp:0.0085,color:'#0b0c0b'});
+  title.position.set(15,6.2,-6); scene.add(title);
   const rock=new THREE.Mesh(new THREE.DodecahedronGeometry(4,0),INK); rock.position.set(-9.5,1,-1); rock.scale.set(1,1.6,1.4); scene.add(rock);
   // signpost with a board per chapter
   const sx=5.2, sy=baseY(5.2);
-  const post=new THREE.Mesh(new THREE.BoxGeometry(0.14,3.6,0.14),INK); post.position.set(sx,sy+1.6,-1.4); post.rotation.z=-0.04; scene.add(post);
+  const post=new THREE.Mesh(new THREE.BoxGeometry(0.14,4.0,0.14),INK); post.position.set(sx,sy+1.8,-1.4); post.rotation.z=-0.04; scene.add(post);
   CHAPTERS.slice(1).forEach((c,i)=>{
     const b=textMesh([{t:`${c.title.replace('The ','').toUpperCase()} · ${c.sub}  ${Math.round(c.spawn-sx)} m  →`,size:30,font:F_MONO,ls:3}],{upp:0.0095,color:'#d9d4c6',bg:'#0b0c0b',pad:10});
-    b.position.set(sx+1.1,sy+3.1-i*0.42,-1.3+i*0.01); b.rotation.z=[0.05,-0.03,0.02,-0.06,0.03][i]; b.rotation.y=[0.12,-0.1,0.2,-0.05,0.08][i]; scene.add(b);
+    b.position.set(sx+1.25,sy+3.25-i*0.6,-1.3+i*0.02); b.rotation.z=[0.035,-0.025,0.02,-0.035,0.025][i]; b.rotation.y=[0.05,-0.04,0.06,-0.03,0.04][i]; scene.add(b);
   });
-  addCrow(sx,sy+3.42,-1.4);
+  addCrow(sx,sy+3.8,-1.4);
   // a laptop left on a stump
   const lx=9.4, ly=baseY(9.4);
   const stump=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.55,0.62,8),INK); stump.position.set(lx,ly+0.26,-1.5); scene.add(stump);
