@@ -321,6 +321,8 @@ body.touch #subtitle{bottom:calc(210px + env(safe-area-inset-bottom,0px))}
 .lt-foot{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:22px}
 .seal{width:94px;height:94px;border-radius:50%;border:0;cursor:pointer;background:radial-gradient(circle at 35% 30%,#b46a58,#7d3527 60%,#5a2319);color:#f1dcc8;font-family:var(--display);font-size:14px;letter-spacing:.06em;box-shadow:0 6px 14px rgba(60,20,10,.45),inset 0 -4px 8px rgba(0,0,0,.35),inset 0 3px 6px rgba(255,210,190,.25);transition:transform .2s;display:grid;place-items:center;text-align:center;line-height:1.15;padding:10px}
 .seal:hover{transform:scale(1.06) rotate(-6deg)}
+.lt-links{margin:18px 0 0;font-family:var(--serif);font-size:16px;color:#4b4334}.lt-links a{color:var(--blue-ink)}
+.end-links{margin:18px 0 0;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ash)}.end-links a{color:var(--ember)}
 .lt-note{color:#6b604c;font-size:10.5px}
 .letter.fold{animation:fold .9s cubic-bezier(.6,0,.4,1) forwards;pointer-events:none}
 @keyframes fold{40%{transform:perspective(1200px) rotateX(55deg) scaleY(.6)}100%{transform:perspective(1200px) rotateX(80deg) scale(.2) translateY(-60%);opacity:0}}
@@ -399,7 +401,7 @@ body.touch #subtitle{bottom:calc(210px + env(safe-area-inset-bottom,0px))}
   <div class="intro-inner">
     <span class="mono role">Software engineer · HID Global · Websites for businesses</span>
     <h1>Ashish Kumar</h1>
-    <p>I build AI agents and web products at HID Global, and I design websites for businesses on the side. This portfolio is a walk through a fogbound wood. Carry the lantern east, light the lamps, gather embers, jump the thorns, and don't let the Shade catch you. There's a dawn at the end.</p>
+    <p>I build AI agents and web products at HID Global, and I design websites for businesses on the side. This portfolio is a walk through a fogbound wood. Carry the lantern east, light the lamps, gather embers, and find the pages. There's a dawn at the end.</p>
     <div class="intro-actions">
       <button class="btn" id="enterBtn">Enter the wood</button>
       <button class="btn ghost" id="pageBtn1">Read it as a plain page</button>
@@ -419,8 +421,8 @@ body.touch #subtitle{bottom:calc(210px + env(safe-area-inset-bottom,0px))}
     <div><div class="sig">Ashish Kumar<small>Software engineer</small></div><div id="pagesHud" aria-label="Loose pages found"></div><div id="emberHud" aria-label="Embers collected"></div></div>
     <div class="hud-btns">
       <button class="hbtn" id="chapBtn" aria-expanded="false">Chapters</button>
+      <button class="hbtn" id="contactBtn">Contact</button>
       <button class="hbtn" id="pageBtn2">Plain page</button>
-      <button class="hbtn" id="hazBtn" aria-pressed="true">Hazards on</button>
       <button class="hbtn" id="sndBtn" aria-pressed="true">Sound on</button>
     </div>
   </div>
@@ -452,6 +454,7 @@ body.touch #subtitle{bottom:calc(210px + env(safe-area-inset-bottom,0px))}
     <dl class="end-stats" id="endStats"></dl>
     <p class="end-secret" id="endSecret"></p>
     <div class="end-actions"><button class="btn" id="endCrow">Send a crow</button><button class="btn ghost" id="endHire">See the workshop</button><button class="btn ghost" id="endStay">Keep exploring</button><button class="btn ghost" id="endAgain">Walk again</button></div>
+    <p class="end-links"><a href="https://github.com/ashish7475" target="_blank" rel="noopener">GitHub</a> · <a href="https://linkedin.com/in/ashish7475" target="_blank" rel="noopener">LinkedIn</a> · ashish729912@gmail.com</p>
   </div>
 </div>
 
@@ -554,6 +557,8 @@ const CHAPTERS=[
   {id:"experience",x0:233,num:"IV",title:"The Crossing",sub:"Experience",spawn:234.5},
   {id:"contact",x0:282,num:"V",title:"The Signal",sub:"Hire & contact",spawn:283}
 ];
+/* Web3Forms access key (free at web3forms.com, tied to ashish729912@gmail.com). Leave empty to fall back to FormSubmit, then to the visitor's own email app. */
+const WEB3FORMS_KEY='';
 const ARCH_X=[180,194,208,222,229];
 const INTERACT=[
   {x:66,r:2.2,label:"Open the journal",act:()=>openOv("about")},
@@ -564,7 +569,7 @@ const INTERACT=[
   {x:236.3,r:2,label:"Open the ledger",act:()=>openOv("experience")},
   {x:297.2,r:1.6,label:"Send a crow",act:()=>openOv("letter","hello")},
   {x:302.6,r:1.8,label:"Open the workshop",act:()=>openOv("services")},
-  {x:307.4,r:2.2,label:"Tune the radio",act:()=>openOv("contact")}
+  {x:307.4,r:2.2,label:"Tune the radio: email, GitHub, LinkedIn",act:()=>openOv("contact")}
 ];
 
 function env01(x){ if(x<86)return 1; if(x<94)return 1-(x-86)/8; if(x<166)return 0; if(x<174)return (x-166)/8; return 1; }
@@ -754,7 +759,7 @@ function buildWorld(){
     m.position.set(x,12,z); m.rotation.z=-0.42; scene.add(m);
     animated.push(t=>{ m.material.opacity=o*(0.7+0.3*Math.sin(t*0.4+i*1.7)); });
   });
-  buildPrologue(); buildCabin(); buildMachine(); buildHollow(); buildCrossing(); buildSignal(); buildLamps(); buildPages(); buildEmbers(); buildHazards(); buildShade(); buildEnding();
+  buildPrologue(); buildCabin(); buildMachine(); buildHollow(); buildCrossing(); buildSignal(); buildLamps(); buildPages(); buildEmbers(); buildShade(); buildEnding();
 }
 
 /* ---- Prologue ---- */
@@ -1175,7 +1180,7 @@ function updateEmbers(t,dt){
 }
 
 /* ---- Hazards: thorn patches and the Shade that follows you ---- */
-let hazards=true; const thornMeshes=[];
+let hazards=false; const thornMeshes=[];
 function buildHazards(){
   THORNS.forEach(([tx,w])=>{
     const parts=[]; const n=Math.round(w*16);
@@ -1834,6 +1839,7 @@ function buildLetter(st,topic){
         <div><label for="lt-email">Write back to</label><input id="lt-email" name="email" type="email" placeholder="you@example.com" autocomplete="email"></div></div>
       <p class="lt-err" hidden></p>
       <div class="lt-foot"><button type="submit" class="seal"><span>Seal<br>&amp; send</span></button><span class="mono lt-note">A crow carries this straight to his inbox</span></div>
+      <p class="lt-links">Or find me on <a href="https://${esc(C.github)}" target="_blank" rel="noopener">GitHub</a> · <a href="https://${esc(C.linkedin)}" target="_blank" rel="noopener">LinkedIn</a> · <b>${esc(C.email)}</b></p>
     </form>
     <div class="flight" hidden>${CROW_SVG}<div class="envelope"><i></i></div><div class="fl-text"><p class="fl-msg"></p><div class="fl-actions"></div></div></div>
   </div>`;
@@ -1850,9 +1856,13 @@ function buildLetter(st,topic){
     form.classList.add('fold');
     const subject=`Fogwalk · ${topicL} · from ${name}`;
     const body=`${msg}\n\n${business?`Business: ${business}\n`:''}— ${name} (${email})`;
-    const send=fetch('https://formsubmit.co/ajax/'+C.email,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    const tryWeb3=()=>WEB3FORMS_KEY?fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({access_key:WEB3FORMS_KEY,subject,from_name:'Fogwalk crow',name,email,replyto:email,topic:topicL,business:business||'—',message:msg})})
+      .then(r=>r.json()).then(j=>!!(j&&j.success)).catch(()=>false):Promise.resolve(false);
+    const tryFormSubmit=()=>fetch('https://formsubmit.co/ajax/'+C.email,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({name,email,_replyto:email,_subject:subject,topic:topicL,business:business||'—',message:msg,_template:'table',_captcha:'false'})})
       .then(r=>r.json()).then(j=>j&&(j.success===true||j.success==='true')).catch(()=>false);
+    const send=tryWeb3().then(ok=>ok||tryFormSubmit());
     timers.push(setTimeout(()=>{ form.hidden=true; flight.hidden=false; AU.flutter(); launchCrow(); },850));
     timers.push(setTimeout(()=>AU.flutter(),2100));
     Promise.all([send,new Promise(r=>timers.push(setTimeout(r,4200)))]).then(([ok])=>{
@@ -1925,7 +1935,7 @@ function buildRadio(st){
     const isLock=bd<0.35;
     if(isLock&&locked!==best){ locked=best; AU.lock();
       readout.querySelector('.copy')&&readout.querySelector('.copy').remove();
-      rtext.classList.remove('static'); rtext.innerHTML=`<span class="rk">${best.f.toFixed(1)} MHz · ${best.k}</span><span class="rv">${esc(best.v)}</span>`;
+      rtext.classList.remove('static'); const href=best.k==='Email'?'mailto:'+best.v:'https://'+best.v; rtext.innerHTML=`<span class="rk">${best.f.toFixed(1)} MHz · ${best.k}</span><a class="rv" href="${esc(href)}" target="_blank" rel="noopener" style="color:inherit">${esc(best.v)}</a>`;
       const b=document.createElement('button'); b.className='copy'; b.dataset.copy=best.v; b.textContent='Copy'; readout.appendChild(b);
     } else if(!isLock){ if(locked){ locked=null; const cb=readout.querySelector('.copy'); if(cb) cb.remove(); }
       rtext.classList.add('static'); rtext.querySelector('.rk').textContent=f.toFixed(1)+' MHz';
@@ -1982,7 +1992,7 @@ function startGame(){
   if(document.activeElement) document.activeElement.blur();
 }
 $('#enterBtn').addEventListener('click',startGame);
-$('#hazBtn').addEventListener('click',()=>setHazards(!hazards));
+$('#contactBtn').addEventListener('click',()=>{ if(!started) startGame(); openOv('contact'); });
 $('#endCrow').addEventListener('click',()=>{ hideEnd(); freeRoam=true; openOv('letter','hello'); });
 $('#endHire').addEventListener('click',()=>{ hideEnd(); freeRoam=true; openOv('services'); });
 $('#endStay').addEventListener('click',()=>{ hideEnd(); freeRoam=true; });
