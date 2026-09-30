@@ -1600,7 +1600,7 @@ function updateChapter(){
   if(started){
     if(P.x>12&&!hints.drag){ hints.drag=1; subtitle(isTouch?"Drag the scene to look around. It is all there, in depth.":"Drag anywhere to look around. The wood is deeper than it looks.",5); }
     if(P.x>21&&!hints.thorn&&hazards){ hints.thorn=1; subtitle("Thorns ahead. Jump them, or they'll have you.",4); }
-    if(P.x>104&&!hints.lever&&!leverPulled){ hints.lever=1; subtitle("A lever, cold and rusted. Somewhere above, something waits to turn.",5); }
+    if(P.x>104&&P.x<124&&!hints.lever&&!leverPulled){ hints.lever=1; subtitle("A lever, cold and rusted. Somewhere above, something waits to turn.",5); }
     if(P.x>235&&!hints.cross){ hints.cross=1; subtitle("Each plank is a year. Its lamp lights when you land.",5); }
   }
 }
